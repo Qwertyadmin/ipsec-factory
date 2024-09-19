@@ -1,0 +1,39 @@
+# ipsec.conf - strongSwan IPsec configuration file
+
+# template file for ipsecFactory script
+
+config setup
+
+conn %default
+        keyexchange=ikev2
+        left=%any
+        leftauth=pubkey
+        leftcert=serverCert_{SERVERDOMAINNAME}.pem
+        leftid={SERVERDOMAINNAME}
+        leftsubnet={LOCALSUBNET}
+        right=%any
+        rightsourceip=%dhcp
+        eap_identity=%identity
+        auto=add
+
+conn rwPUBKEY
+        leftsendcert=always
+        rightauth=pubkey
+        rightca="C={COUNTRYNAME}, O={ORGNAME}, CN={CANAME}"
+
+conn rwEAPTLS
+        leftsendcert=always
+        rightauth=eap-tls
+        rightca="C={COUNTRYNAME}, O={ORGNAME}, CN={CANAME}"
+
+conn rwPUBKEYIOS
+        leftsendcert=always
+        rightauth=pubkey
+        rightid={SHAREDSAN}
+        rightca="C={COUNTRYNAME}, O={ORGNAME}, CN={CANAME}"
+
+conn rwEAPTLSIOS
+        leftsendcert=always
+        rightauth=eap-tls
+        rightid={SHAREDSAN}
+        rightca="C={COUNTRYNAME}, O={ORGNAME}, CN={CANAME}"

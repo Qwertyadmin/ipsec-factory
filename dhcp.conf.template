@@ -1,0 +1,25 @@
+# /etc/strongswan.d/charon/dhcp - strongSwan DHCP plugin file
+
+# template file for ipsecFactory script
+
+dhcp {
+
+    # Always use the configured server address.
+    force_server_address = yes
+
+    # Derive user-defined MAC address from hash of IKE identity and send client
+    # identity DHCP option.
+    identity_lease = yes
+
+    # Interface name the plugin uses for address allocation.
+    # interface =
+
+    # Whether to load the plugin. Can also be an integer to increase the
+    # priority of this plugin.
+    load = yes
+
+    # DHCP server unicast or broadcast IP address.
+    server = {DHCPSERVER}
+
+}
+
